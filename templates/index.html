@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy New Year 2026 ✨</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(circle at top, #1a1a2e, #000);
+            color: white;
+            font-family: "Segoe UI", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 20px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.18);
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, gold, orange);
+            cursor: pointer;
+        }
+
+        .countdown {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            animation: pop 0.5s ease-in-out;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .wish {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            opacity: 0.55;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    {% if not message %}
+        <h1>✨ Welcome 2026 ✨</h1>
+        <p>Enter your name to receive a special wish</p>
+
+        <form method="POST">
+            <input type="text" name="name" placeholder="Your name..." required>
+            <button type="submit">Celebrate 🎉</button>
+        </form>
+
+    {% else %}
+        <div id="countdown" class="countdown">3</div>
+
+        <div id="wish" class="wish">
+            <h1>{{ message }}</h1>
+            <p>“{{ quote }}”</p>
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        Made with Python 🐍 by Deshu
+    </div>
+
+</div>
+
+{% if message %}
+<script>
+    let count = 3;
+    const countdownEl = document.getElementById("countdown");
+    const wishEl = document.getElementById("wish");
+
+    countdownEl.style.display = "block";
+
+    const timer = setInterval(() => {
+        count--;
+        if (count > 0) {
+            countdownEl.textContent = count;
+        } else {
+            clearInterval(timer);
+            countdownEl.style.display = "none";
+            wishEl.style.display = "block";
+        }
+    }, 1000);
+</script>
+{% endif %}
+
+</body>
+</html>
