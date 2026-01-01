@@ -2,93 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Happy New Year 2026 ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Happy New Year 2026</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            height: 100vh;
+            min-height: 100svh;
             background: radial-gradient(circle at top, #1a1a2e, #000);
-            color: white;
-            font-family: "Segoe UI", sans-serif;
+            font-family: "Segoe UI", system-ui, sans-serif;
+            color: #fff;
+
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+
+            padding: 60px 16px 24px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(12px);
-            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+
             border-radius: 20px;
-            width: 360px;
+            padding: 32px 24px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.18);
+
+            box-shadow: 0 0 45px rgba(255, 215, 0, 0.22);
+            animation: fadeIn 0.6s ease;
         }
 
         h1 {
-            font-size: 1.9rem;
-            margin-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.8rem;
         }
 
         p {
-            opacity: 0.85;
-            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            margin-top: 20px;
+            padding: 14px;
             border-radius: 10px;
             border: none;
-            outline: none;
             font-size: 1rem;
+            margin-bottom: 16px;
         }
 
         button {
-            margin-top: 15px;
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             border: none;
+            background: #ffd700;
+            color: #000;
             font-size: 1rem;
             font-weight: bold;
-            background: linear-gradient(90deg, gold, orange);
             cursor: pointer;
         }
 
-        .countdown {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-top: 20px;
-            display: none;
-            animation: pop 0.5s ease-in-out;
+        button:hover {
+            background: #ffea70;
         }
 
-        @keyframes pop {
-            from { transform: scale(0.7); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        .countdown {
+            font-size: 2rem;
+            margin: 20px 0;
         }
 
         .wish {
-            margin-top: 20px;
-            display: none;
-            animation: fadeIn 1s ease-in;
+            font-size: 1.4rem;
+            margin-top: 16px;
+        }
+
+        .quote {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        footer {
+            margin-top: 24px;
+            font-size: 0.8rem;
+            opacity: 0.6;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .footer {
-            margin-top: 25px;
-            font-size: 0.75rem;
-            opacity: 0.55;
+        /* Desktop polish */
+        @media (min-width: 768px) {
+            body {
+                align-items: center;
+                padding: 0;
+            }
         }
     </style>
 </head>
+
 <body>
 
 <div class="card">
@@ -101,42 +129,39 @@
             <input type="text" name="name" placeholder="Your name..." required>
             <button type="submit">Celebrate 🎉</button>
         </form>
-
     {% else %}
-        <div id="countdown" class="countdown">3</div>
+        <div class="countdown" id="countdown">3</div>
 
-        <div id="wish" class="wish">
-            <h1>{{ message }}</h1>
-            <p>“{{ quote }}”</p>
+        <div class="wish" id="wish" style="display:none;">
+            {{ message }}
+            <div class="quote">
+                “New year, new energy, new chances to grow 🌱”
+            </div>
         </div>
+
+        <script>
+            let count = 3;
+            const countdownEl = document.getElementById("countdown");
+            const wishEl = document.getElementById("wish");
+
+            const timer = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownEl.textContent = count;
+                } else {
+                    clearInterval(timer);
+                    countdownEl.style.display = "none";
+                    wishEl.style.display = "block";
+                }
+            }, 1000);
+        </script>
     {% endif %}
 
-    <div class="footer">
-        Made with Python 🐍 by Deshu
-    </div>
+    <footer>
+        Made with 🐍 Python by Deshu
+    </footer>
 
 </div>
-
-{% if message %}
-<script>
-    let count = 3;
-    const countdownEl = document.getElementById("countdown");
-    const wishEl = document.getElementById("wish");
-
-    countdownEl.style.display = "block";
-
-    const timer = setInterval(() => {
-        count--;
-        if (count > 0) {
-            countdownEl.textContent = count;
-        } else {
-            clearInterval(timer);
-            countdownEl.style.display = "none";
-            wishEl.style.display = "block";
-        }
-    }, 1000);
-</script>
-{% endif %}
 
 </body>
 </html>
