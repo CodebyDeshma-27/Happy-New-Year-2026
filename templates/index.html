@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Happy New Year 2026</title>
+    <title>Happy New Year 2026 ✨</title>
 
     <style>
         * {
@@ -12,27 +11,21 @@
 
         body {
             margin: 0;
-            min-height: 100svh;
+            height: 100vh;
             background: radial-gradient(circle at top, #1a1a2e, #000);
-            font-family: "Segoe UI", system-ui, sans-serif;
-            color: #fff;
-
+            color: white;
+            font-family: "Segoe UI", sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-
-            padding: 60px 16px 24px;
+            align-items: center;
         }
 
         .card {
-            width: 100%;
-            max-width: 420px;
-
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(14px);
-
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            padding: 40px;
             border-radius: 20px;
-            padding: 32px 24px;
+            width: 360px;
             text-align: center;
 
             box-shadow: 0 0 45px rgba(255, 215, 0, 0.22);
@@ -40,18 +33,19 @@
         }
 
         h1 {
-            margin-top: 0;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
+            margin-bottom: 10px;
         }
 
         p {
-            opacity: 0.9;
-            margin-bottom: 24px;
+            opacity: 0.85;
+            font-size: 0.95rem;
         }
 
         input {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
+            margin-top: 20px;
             border-radius: 10px;
             border: none;
             font-size: 1rem;
@@ -59,6 +53,7 @@
         }
 
         button {
+            margin-top: 15px;
             width: 100%;
             padding: 14px;
             border-radius: 12px;
@@ -75,8 +70,16 @@
         }
 
         .countdown {
-            font-size: 2rem;
-            margin: 20px 0;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+            animation: pop 0.5s ease-in-out;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .wish {
@@ -97,21 +100,19 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Desktop polish */
+        .footer {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            opacity: 0.55;
+        }
+
         @media (min-width: 768px) {
-            body {
-                align-items: center;
-                padding: 0;
+            .card {
+                padding: 36px 32px;
             }
         }
     </style>
@@ -123,7 +124,7 @@
 
     {% if not message %}
         <h1>✨ Welcome 2026 ✨</h1>
-        <p>Enter your name to receive a special wish</p>
+        <p>Enter your name to receive a special New Year wish</p>
 
         <form method="POST">
             <input type="text" name="name" placeholder="Your name..." required>
